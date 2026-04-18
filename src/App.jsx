@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Menu, X, 
   Mail, Phone, MapPin, ChevronRight, CheckCircle2, 
-  Home, Maximize, PenTool 
+  Home, Maximize, PenTool, Clock
 } from 'lucide-react';
 import { FaFacebook as Facebook, FaInstagram as Instagram, FaLinkedin as Linkedin, FaTwitter as Twitter } from 'react-icons/fa';
 
@@ -452,14 +452,14 @@ export default function App() {
                       <MapPin className="text-emerald-500 mt-1 mr-4 shrink-0" size={24} />
                       <div>
                         <h4 className="font-semibold text-lg">Location</h4>
-                        <p className="text-slate-400 mt-1">Drogheda, County Louth<br/>Ireland</p>
+                        <p className="text-slate-400 mt-1">Meath, Ireland</p>
                       </div>
                     </div>
                     <div className="flex items-start">
                       <Phone className="text-emerald-500 mt-1 mr-4 shrink-0" size={24} />
                       <div>
                         <h4 className="font-semibold text-lg">Phone</h4>
-                        <p className="text-slate-400 mt-1">+353 (0) 8X XXX XXXX</p>
+                        <p className="text-slate-400 mt-1">085 745 3382</p>
                       </div>
                     </div>
                     <div className="flex items-start">
@@ -467,6 +467,13 @@ export default function App() {
                       <div>
                         <h4 className="font-semibold text-lg">Email</h4>
                         <p className="text-slate-400 mt-1">info@tektonspaces.ie</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <Clock className="text-emerald-500 mt-1 mr-4 shrink-0" size={24} />
+                      <div>
+                        <h4 className="font-semibold text-lg">Hours</h4>
+                        <p className="text-slate-400 mt-1">Mon — Fri: 8:00 — 18:00</p>
                       </div>
                     </div>
                   </div>
