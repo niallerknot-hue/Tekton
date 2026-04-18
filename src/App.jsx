@@ -32,7 +32,7 @@ export default function App() {
   // Social Links Configuration (Update these URLs with your friend's actual profiles)
   const socialLinks = {
     facebook: "https://facebook.com",
-    instagram: "https://instagram.com",
+    instagram: "https://www.instagram.com/_tektonconstruction_?igsh=ajlpNWU2dzhrN3dw",
     linkedin: "https://linkedin.com",
     twitter: "https://twitter.com"
   };
