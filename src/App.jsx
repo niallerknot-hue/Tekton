@@ -141,7 +141,7 @@ export default function App() {
           <div className="absolute inset-0 z-0">
             {/* INSERT YOUR HERO IMAGE HERE */}
             <img 
-              src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2075&q=80" 
+              src="/images/hero-home.jpg" 
               alt="Modern architectural garden room" 
               className="w-full h-full object-cover"
             />
@@ -186,7 +186,7 @@ export default function App() {
               <div className="lg:w-1/2">
                 {/* INSERT YOUR APPROACH/PROCESS IMAGE HERE */}
                 <div className="relative group">
-                  <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Tekton Construction process" className="rounded-lg shadow-2xl z-10 relative transition-transform duration-500 group-hover:-translate-y-2" />
+                  <img src="/images/garden-rooms-extensions.jpg" alt="Tekton Construction process" className="rounded-lg shadow-2xl z-10 relative transition-transform duration-500 group-hover:-translate-y-2" />
                   <div className="absolute -bottom-6 -right-6 w-full h-full border-4 border-stone-300 rounded-lg z-0 hidden md:block transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2"></div>
                 </div>
               </div>
@@ -222,7 +222,7 @@ export default function App() {
         {/* INTERSTITIAL BANNER */}
         <section className="relative py-20 bg-emerald-950 flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Architectural detail" className="w-full h-full object-cover opacity-20 mix-blend-luminosity" />
+            <img src="/images/garden-rooms-extensions.jpg" alt="Architectural detail" className="w-full h-full object-cover opacity-20 mix-blend-luminosity" />
           </div>
           <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
             <p className="text-2xl md:text-4xl text-white font-light tracking-wide leading-relaxed">
@@ -317,21 +317,18 @@ export default function App() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* INSERT YOUR PORTFOLIO IMAGES HERE */}
               {[
-                "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-                "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-                "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-                "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-                "https://images.unsplash.com/photo-1600607688969-a5bfcd64bd40?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-                "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-              ].map((imgSrc, index) => (
+                { src: "/images/garden-room-modern.jpg", title: "Modern Garden Studio" },
+                { src: "/images/garden-room-lshape.jpg", title: "L-Shaped Timber Extension" },
+                { src: "/images/hero-home.jpg", title: "Bespoke Home Office" },
+                { src: "/images/steves-2.png", title: "Evening Garden Room" },
+                { src: "/images/craftsmanship.jpg", title: "Precision Core Structure" },
+                { src: "/images/garden-rooms-extensions.jpg", title: "Heritage Stone Extension" }
+              ].map((project, index) => (
                 <div key={index} className="group relative h-72 md:h-80 overflow-hidden bg-slate-800 rounded-xl cursor-pointer shadow-lg">
-                  <img src={imgSrc} alt={`Tekton Spaces Project ${index + 1}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-90 group-hover:opacity-100" />
+                  <img src={project.src} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-90 group-hover:opacity-100" />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                     <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                      <h4 className="text-xl font-bold text-white mb-1">Project Title</h4>
-                      <p className="text-emerald-400 font-medium flex items-center">
-                        View Details <ChevronRight size={16} className="ml-1" />
-                      </p>
+                      <h4 className="text-xl font-bold text-white">{project.title}</h4>
                     </div>
                   </div>
                 </div>
