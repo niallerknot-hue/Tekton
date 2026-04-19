@@ -1,6 +1,34 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, CheckCircle2 } from 'lucide-react';
+
+const FadeIn = ({ children, delay = 0 }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const domRef = useRef();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) setIsVisible(true);
+      });
+    }, { threshold: 0.1 });
+    
+    if (domRef.current) observer.observe(domRef.current);
+    return () => {
+      if (domRef.current) observer.unobserve(domRef.current);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={domRef}
+      className={`transition-all duration-[1500ms] ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24'}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+};
 
 export default function Portfolio() {
   // Scroll to top on load
@@ -81,42 +109,44 @@ export default function Portfolio() {
       {/* Portfolio Projects */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-24">
         {projects.map((project, index) => (
-          <div key={index} className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 items-center`}>
-            
-            {/* Image Side */}
-            <div className="w-full lg:w-1/2 rounded-2xl overflow-hidden shadow-2xl shrink-0 group">
-              <img 
-                src={project.src} 
-                alt={project.title} 
-                className="w-full h-[350px] md:h-[450px] object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </div>
-
-            {/* Content Side */}
-            <div className="w-full lg:w-1/2">
-              <h2 className="text-3xl font-bold text-slate-900 mb-4">{project.title}</h2>
-              <div className="w-16 h-1 bg-emerald-700 mb-6"></div>
+          <FadeIn key={index}>
+            <div className={`flex flex-col ${index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-12 items-center`}>
               
-              <div className="flex flex-wrap gap-2 mb-8">
-                {project.specs.map((spec, i) => (
-                  <span key={i} className="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                    {spec}
-                  </span>
-                ))}
+              {/* Image Side */}
+              <div className="w-full md:w-1/2 rounded-2xl overflow-hidden shadow-2xl shrink-0 group">
+                <img 
+                  src={project.src} 
+                  alt={project.title} 
+                  className="w-full h-[350px] md:h-[450px] object-cover hover:scale-105 transition-transform duration-700"
+                />
               </div>
-              
-              <p className="text-lg text-slate-600 leading-relaxed bg-white p-6 md:p-8 rounded-xl border border-slate-100 shadow-sm relative">
-                {project.description}
-              </p>
-              
-              <div className="mt-8">
-                <Link to="/" className="inline-flex items-center text-emerald-700 font-bold hover:text-emerald-800 hover:underline group">
-                  <CheckCircle2 size={20} className="mr-2 group-hover:scale-110 transition-transform" /> Discuss a similar project with us
-                </Link>
-              </div>
-            </div>
 
-          </div>
+              {/* Content Side */}
+              <div className="w-full md:w-1/2">
+                <h2 className="text-3xl font-bold text-slate-900 mb-4">{project.title}</h2>
+                <div className="w-16 h-1 bg-emerald-700 mb-6"></div>
+                
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {project.specs.map((spec, i) => (
+                    <span key={i} className="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                      {spec}
+                    </span>
+                  ))}
+                </div>
+                
+                <p className="text-lg text-slate-600 leading-relaxed bg-white p-6 md:p-8 rounded-xl border border-slate-100 shadow-sm relative">
+                  {project.description}
+                </p>
+                
+                <div className="mt-8">
+                  <Link to={`/?project=${encodeURIComponent(project.title)}#contact`} className="inline-flex items-center text-emerald-700 font-bold hover:text-emerald-800 hover:underline group">
+                    <CheckCircle2 size={20} className="mr-2 group-hover:scale-110 transition-transform" /> Discuss a similar project with us
+                  </Link>
+                </div>
+              </div>
+
+            </div>
+          </FadeIn>
         ))}
       </div>
 

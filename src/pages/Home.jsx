@@ -1,16 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   Menu, X, 
   Mail, Phone, MapPin, ChevronRight, CheckCircle2, 
-  Home, Maximize, PenTool, Clock
+  Home as HomeIcon, Maximize, PenTool, Clock
 } from 'lucide-react';
 import { FaFacebook as Facebook, FaInstagram as Instagram, FaLinkedin as Linkedin, FaTwitter as Twitter } from 'react-icons/fa';
 
-export default function App() {
+export default function Home() {
+  const location = useLocation();
+  const [initialMessage, setInitialMessage] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formStatus, setFormStatus] = useState(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const project = params.get('project');
+    if (project) {
+      setInitialMessage(`Hello, I am interested in discussing a project similar to the ${project}.`);
+    }
+
+    if (location.hash === '#contact') {
+      const element = document.getElementById('contact');
+      if (element) {
+        setTimeout(() => element.scrollIntoView({ behavior: 'smooth' }), 300);
+      }
+    } else if (!location.hash) {
+      window.scrollTo(0, 0);
+    }
+  }, [location]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -286,7 +305,7 @@ export default function App() {
               {/* External Finishes */}
               <div className="bg-white p-8 md:p-10 rounded-xl shadow-sm border border-slate-100 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 group">
                 <div className="w-14 h-14 bg-emerald-50 rounded-lg flex items-center justify-center mb-6 group-hover:bg-emerald-100 transition-colors">
-                  <Home className="text-emerald-700" size={28} />
+                  <HomeIcon className="text-emerald-700" size={28} />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-6">External Finishes</h3>
                 <ul className="space-y-5">
@@ -410,7 +429,7 @@ export default function App() {
                 {/* Details Side */}
                 <div className="md:w-7/12 p-8 md:p-12 bg-white grid grid-cols-1 sm:grid-cols-2 gap-8">
                   <div className="flex items-start">
-                     <Home className="text-stone-400 mr-4 shrink-0 mt-1" size={24}/>
+                     <HomeIcon className="text-stone-400 mr-4 shrink-0 mt-1" size={24}/>
                      <div>
                        <h4 className="font-bold text-slate-900 text-lg mb-1">Intended Use</h4>
                        <p className="text-slate-500 text-sm leading-relaxed">Garden room or live-in space requirements.</p>
@@ -481,7 +500,7 @@ export default function App() {
                   </div>
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-2">Message</label>
-                    <textarea id="message" name="message" required rows="4" className="w-full px-4 py-3 rounded-md border border-slate-300 focus:ring-2 focus:ring-emerald-700 focus:border-emerald-700 outline-none transition-colors" placeholder="Tell us about your project..."></textarea>
+                    <textarea id="message" name="message" required rows="4" className="w-full px-4 py-3 rounded-md border border-slate-300 focus:ring-2 focus:ring-emerald-700 focus:border-emerald-700 outline-none transition-colors" placeholder="Tell us about your project..." defaultValue={initialMessage} key={initialMessage}></textarea>
                   </div>
 
                   {formStatus === "Success" && (
